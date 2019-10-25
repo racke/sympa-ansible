@@ -47,7 +47,8 @@
 - name: Install prerequisites for Sympa
   tags: sympa_prereq
   import_tasks: sympa_prereq.yml
-  
+  when: sympa.installation_method != 'package'
+
 - name: Install and configure database
   tags: sympa_db
   include_tasks: "sympa_db_{{ sympa.db.type | lower }}.yml"
@@ -55,20 +56,27 @@
 - name: Getting source folder name
   tags: always
   include_vars: source_dir_repo.yml
-  when: sympa.install_from_repository
+  when: sympa.installation_method == 'repository'
   
 - name: Getting source folder name
   tags: always
   include_vars: source_dir_tgz.yml
-  when: not sympa.install_from_repository
+  when: sympa.installation_method == 'source'
 
 - name: Download Sympa sources
   tags: sympa_install
   import_tasks: sympa_install/get_sources.yml
+  when: sympa.installation_method != 'package'
 
 - name: Install Sympa software
   tags: sympa_install, reinstall
   import_tasks: sympa_install/deploy.yml
+  when: sympa.installation_method != 'package'
+
+- name: Install Sympa software
+  tags: sympa_install, reinstall
+  import_tasks: sympa_install/package.yml
+  when: sympa.installation_method == 'package'
 
 - name: Sympa post-install operations
   tags: sympa_install
