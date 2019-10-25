@@ -6,8 +6,8 @@
 
 - name: Include retrieving sources from tar.gz task if needed
   import_tasks: get_sources_from_targz.yml
-  when: not sympa.install_from_repository
+  when: sympa.installation_method == 'source'
 
 - name: Include retrieving sources from repository if needed.
   import_tasks: get_sources_from_repo.yml
-  when: sympa.install_from_repository
+  when: sympa.installation_method == 'repository'
