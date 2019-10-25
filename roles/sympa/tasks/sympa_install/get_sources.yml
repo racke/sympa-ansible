@@ -15,3 +15,4 @@
 - name: Include retrieving sources from local directory if needed.
   import_tasks: get_sources_from_sync.yml
   when: sympa.installation_method == 'sync'
+
