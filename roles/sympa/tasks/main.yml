@@ -39,6 +39,12 @@
   set_fact:
     web_domains: "{% set web_domains = [] %}{% for d in sympa_vhosts %}{% set _ = web_domains.append(d.web.domain) %}{% endfor %}{{ web_domains }}"
 
+- name: Write main domain to /etc/mailname
+  template:
+    src: mailname.j2
+    dest: /etc/mailname
+  tags: sympa
+
 - name: Ensure group "sympa" exists
   group:
     name: "{{ sympa.unix_group }}"
