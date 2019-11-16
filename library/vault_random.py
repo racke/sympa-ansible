@@ -5,6 +5,7 @@ from ansible.module_utils.basic import *
 import random
 import string
 import yaml
+import json
 
 from ansible import constants as C
 from ansible.constants import DEFAULT_VAULT_ID_MATCH
