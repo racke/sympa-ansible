@@ -3,7 +3,7 @@
 - name: Check for valid installation method
   assert:
     that:
-      sympa.installation_method in ['repository', 'source']
+      sympa.installation_method in ['repository', 'source', 'sync']
   tags: sympa
 
 - name: Build lists directory path
@@ -74,6 +74,11 @@
   tags: always
   include_vars: source_dir_tgz.yml
   when: sympa.installation_method == 'source'
+
+- name: Getting source folder name
+  tags: always
+  include_vars: source_dir_sync.yml
+  when: sympa.installation_method == 'sync'
 
 - name: Download Sympa sources
   tags: sympa_install
