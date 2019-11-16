@@ -23,7 +23,7 @@
       - gettext
       - git
     state: present
-  when: sympa.installation_method == 'repository'
+  when: sympa.installation_method != 'package'
 
 - name: Install required CPAN Perl modules
   apt:
