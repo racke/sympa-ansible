@@ -11,3 +11,7 @@
 - name: Include retrieving sources from repository if needed.
   import_tasks: get_sources_from_repo.yml
   when: sympa.installation_method == 'repository'
+
+- name: Include retrieving sources from local directory if needed.
+  import_tasks: get_sources_from_sync.yml
+  when: sympa.installation_method == 'sync'

@@ -1,0 +1,18 @@
+---
+
+- name: Ensures git is installed.
+  apt:
+    name: git
+    state: present
+
+- name: Synchronize sources from local directory
+  synchronize:
+    src: "{{ sympa.sync_directory }}/."
+    dest: "{{ install_prefix }}/{{ sympa.install_dir_name }}/src/{{ source_dir }}/."
+
+- name: Prepare configure
+  command: autoreconf -i
+  args:
+    chdir: "{{ install_prefix }}/{{ sympa.install_dir_name }}/src/{{ source_dir }}"
+    executable: /bin/bash
+
