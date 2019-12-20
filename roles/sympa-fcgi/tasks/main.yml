@@ -1,0 +1,30 @@
+---
+- name: Install multiwatch
+  package:
+    name: multiwatch
+  tags:
+    - sympa-fcgi
+
+- name: Set up service for WWSympa
+  include_tasks:
+    file: services.yml
+    apply:
+      tags:
+        - sympa-fcgi
+  vars:
+    unit_name: wwsympa
+    unit_description: "WWSympa - Web interface for Sympa mailing list manager"
+  tags:
+    - always
+
+- name: Set up service for Sympa SOAP server
+  include_tasks:
+    file: services.yml
+    apply:
+      tags:
+        - sympa-fcgi
+  vars:
+    unit_name: sympasoap
+    unit_description: "SympaSOAP - SOAP interface for Sympa mailing list manager"
+  tags:
+    - sympa_fcgi

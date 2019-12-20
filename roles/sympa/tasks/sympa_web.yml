@@ -21,26 +21,9 @@
     daemon_reload: yes
   tags: apache
 
-- name: install sympasoap service config
-  template: src=fcgi/sympasoap.service.j2 dest=/lib/systemd/system/sympasoap.service
-  tags: apache
-
-- name: start sympasoap
-  systemd:
-    state: started
-    name: sympasoap
-    enabled: yes
-    daemon_reload: yes
-  when: sympa.sympasoap.enabled
-  tags: apache
-
-- name: stop sympasoap
-  systemd:
-    state: stopped
-    name: sympasoap
-    enabled: no
-    daemon_reload: yes
-  when: not sympa.sympasoap.enabled
+- name: Run FCGI role
+  import_role:
+    name: sympa-fcgi
   tags: apache
 
 - name: Install Sympa web config
