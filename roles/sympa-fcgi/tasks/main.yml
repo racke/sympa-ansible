@@ -26,5 +26,6 @@
   vars:
     unit_name: sympasoap
     unit_description: "SympaSOAP - SOAP interface for Sympa mailing list manager"
+  when: sympa.sympasoap.enabled
   tags:
     - sympa_fcgi
