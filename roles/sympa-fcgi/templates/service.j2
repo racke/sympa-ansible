@@ -14,7 +14,7 @@ Restart=always
 StandardOutput = null
 StandardInput = socket
 StandardError = null
-Environment="FCGI_CHILDREN={{ sympa.web[ vars[unit_name] + '_procs' ] }}"
+Environment="FCGI_CHILDREN={{ sympa.web.get(unit_name + '_procs') }}"
 EnvironmentFile=-/etc/default/sympa
 Restart=on-failure
 
