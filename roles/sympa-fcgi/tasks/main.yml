@@ -15,7 +15,7 @@
     unit_name: wwsympa
     unit_description: "WWSympa - Web interface for Sympa mailing list manager"
   tags:
-    - always
+    - sympa-fcgi
 
 - name: Set up service for Sympa SOAP server
   include_tasks:
