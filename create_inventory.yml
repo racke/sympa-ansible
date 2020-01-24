@@ -58,12 +58,3 @@
         - postfix
         - sympa
       delegate_to: localhost
-
-    - name: Create symlink for inventory file
-      file:
-        state: link
-        src: "../../.vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory"
-        dest: "{{ inventory_dir }}/inventory"
-        force: yes
-        follow: no
-      delegate_to: localhost
