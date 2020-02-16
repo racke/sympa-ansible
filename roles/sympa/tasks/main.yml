@@ -6,6 +6,13 @@
       sympa.installation_method in ['repository', 'source', 'sync']
   tags: sympa
 
+- name: Check for mandatory parameter
+  assert:
+    that:
+       sympa.sync_directory is defined
+  when: sympa.installation_method == 'sync'
+  tags: sympa
+
 - name: Build lists directory path
   set_fact:
     sympa: "{{ sympa | combine({ 'lists_path': install_prefix + '/' + sympa.install_dir_name + '/list_data'}) }}"
