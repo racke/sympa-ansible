@@ -3,7 +3,7 @@
 - name: Check for valid installation method
   assert:
     that:
-      sympa.installation_method in ['repository', 'source', 'sync']
+      sympa.installation_method in ['package', 'repository', 'source', 'sync']
   tags: sympa
 
 - name: Check for mandatory parameter
