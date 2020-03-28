@@ -14,5 +14,4 @@
   command: autoreconf -i
   args:
     chdir: "{{ install_prefix }}/{{ sympa.install_dir_name }}/src/{{ source_dir }}"
-    executable: /bin/bash
 
