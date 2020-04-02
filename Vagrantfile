@@ -2,15 +2,14 @@
 # Works with vmware fusion and virtual box providers
 
 Vagrant.configure("2") do |config|
+    # VM images to use
+    boxes = [
+        { :name => "local-sympa", :box => "puppetlabs/ubuntu-16.04-64-nocm" }
+    ]
 
-    # The VM Image to use. Find others at: http://vagrantcloud.com
-    # Note: The "nocm" version of this box does not have any puppet software installed
-# TODO : tester avec "ubuntu/xenial64"
-    config.vm.box = "puppetlabs/ubuntu-16.04-64-nocm"
-
-    # VM: "local-sympa"
-    config.vm.define "local-sympa" do |conf|
-        conf.vm.hostname = "local-sympa"
+    boxes.each do |opts|
+      config.vm.define opts[:name] do |conf|
+        conf.vm.box = opts[:box]
         # Give it a fixed IP
         conf.vm.network "private_network", ip: "192.168.66.67", :netmask => "255.255.255.0"
         conf.vm.provider "vmware_fusion" do |v|
@@ -19,6 +18,7 @@ Vagrant.configure("2") do |config|
         conf.vm.provider "virtualbox" do |v|
             v.memory = 1024
         end
+      end
     end
 
 #    # VM: "dev-vm2"
